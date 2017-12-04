@@ -43,9 +43,39 @@ $parameters = array('chat_id' => $chatId, "text" => $text);
 $parameters["method"] = "sendMessage";
 // imposto la inline keyboard
 $keyboard = ['inline_keyboard' => [[
-	['text' =>  'myTex1t', 'callback_data' => 'myCallbackText'],['text' =>  'myTex2t', 'callback_data' => 'myCallbackText']	
+	['text' =>  'myTex1t', 'callback_data' => 'myCallbackText1'],
+	['text' =>  'myTex2t', 'callback_data' => 'myCallbackText2']	
 ]]];
 $parameters["reply_markup"] = json_encode($keyboard, true);
+
+
+if ($result->isType('callback_query')) {
+    $query = $result->getCallbackQuery();
+    $data  = $query->getData();
+    $chid = $query->getFrom()->getId();
+
+    // again, you can't get the message object if the object is a callback_query.
+    // in this case the $json variable would be undefined.
+    // $json = json_decode($query->getMessage(), true);
+    $telegram->sendMessage([
+        'chat_id' => $chid,
+        'text' => 'Here is the callback: ' . $data,
+        'reply_markup' => $keyboard
+    ]);
+
+// Just to make sure that there's a ['message']:
+} /*elseif(isset($result["message"])) {
+    $chat_id = $result["message"]["chat"]["id"];
+
+    $response = $telegram->sendMessage([
+        'chat_id' => $chat_id,
+        'text' => 'Hello',
+        'reply_markup' => $keyboard
+    ]);
+}*/
+
+
+
 
 
 /*$parameters = array('chat_id' => $chatId, "text" => $response);
