@@ -42,7 +42,9 @@ $parameters = array('chat_id' => $chatId, "text" => $text);
 // method è il metodo per l'invio di un messaggio (cfr. API di Telegram)
 $parameters["method"] = "sendMessage";
 // imposto la inline keyboard
-$keyboard = ['inline_keyboard' => [[['text' =>  'myTex1t', 'callback_data' => 'myCallbackText']]]];
+$keyboard = ['inline_keyboard' => [[
+	['text' =>  'myTex1t', 'callback_data' => 'myCallbackText'],['text' =>  'myTex2t', 'callback_data' => 'myCallbackText']	
+]]];
 $parameters["reply_markup"] = json_encode($keyboard, true);
 
 
