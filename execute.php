@@ -15,6 +15,11 @@ $date = isset($message['date']) ? $message['date'] : "";
 $text = isset($message['text']) ? $message['text'] : "";
 $text = trim($text);
 $text = strtolower($text);
+$output = json_decode(file_get_contents('php://input'), TRUE);
+$callback_query = $output["callback_query"]
+$data = $callback_query["data"] // in your case $data is "/plz"
+	
+	
 header("Content-Type: application/json");
 $response = '';
 /*if(strpos($text, "/start") === 0 || strtolower($text) =="ciao")
@@ -47,6 +52,13 @@ $keyboard = ['inline_keyboard' => [[
 	['text' =>  'myTex2t', 'callback_data' => 'myCallbackText2']	
 ]]];
 $parameters["reply_markup"] = json_encode($keyboard, true);
+
+sendMessage($chat_id, "plz");
+switch($data){
+    case '/plz':
+    sendMessage($chat_id, "plz");
+    break;
+}
 
 
 
