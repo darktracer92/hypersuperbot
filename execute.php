@@ -56,10 +56,10 @@ if ($result->isType('callback_query')) {
 
     // again, you can't get the message object if the object is a callback_query.
     // in this case the $json variable would be undefined.
-    // $json = json_decode($query->getMessage(), true);
+    $json = json_decode($query->getMessage(), true);
     $telegram->sendMessage([
         'chat_id' => $chid,
-        'text' => 'Here is the callback: ' . $data,
+        'text' => 'Here is the calzlback: ' . $data,
         'reply_markup' => $keyboard
     ]);
 
