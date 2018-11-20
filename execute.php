@@ -22,7 +22,7 @@ $data = $callback_query["data"] // in your case $data is "/plz"
 	
 header("Content-Type: application/json");
 $response = '';
-/*if(strpos($text, "/start") === 0 || strtolower($text) =="ciao")
+if(strpos($text, "/start") === 0 || strtolower($text) =="ciao")
 {
 	$response = "Ciao $firstname, benvenuto!";
 }
@@ -37,7 +37,7 @@ elseif($text=="domanda 2")
 else
 {
 	$response = "Comando non valido!";
-}*/
+
 
 //----------------------------
 // la mia risposta è un array JSON composto da chat_id, text, method
@@ -66,7 +66,6 @@ switch($data){
 
 
 
-
-/*$parameters = array('chat_id' => $chatId, "text" => $response);
-$parameters["method"] = "sendMessage";*/
+$parameters = array('chat_id' => $chatId, "text" => $response);
+$parameters["method"] = "sendMessage";
 echo json_encode($parameters);
